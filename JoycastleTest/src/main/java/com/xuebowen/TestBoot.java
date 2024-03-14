@@ -1,5 +1,7 @@
 package com.xuebowen;
 
+import java.util.List;
+
 public class TestBoot {
     public static void main(String[] args) {  
         //示例，添加玩家到排行榜并查询排名  
@@ -17,9 +19,10 @@ public class TestBoot {
         BucketSortRanking.addPlayer(player4);  
         BucketSortRanking.addPlayer(player5);  
         BucketSortRanking.addPlayer(player6);  
-        BucketSortRanking.addPlayer(player6);  
         BucketSortRanking.addPlayer(player7);  
-        
+        //系统提供玩家名次查询接口 ，玩家能够查询自己名次前后10位玩家的分数和名次
+        //(Player, 前几名，后几名)
+        List<Rank> ranks = BucketSortRanking.getPlayerRankAndNeighbors(player6, 2, 2);
         System.out.println("Player 1 Rank: " + BucketSortRanking.getPlayerRank(1));  
         System.out.println("Player 2 Rank: " + BucketSortRanking.getPlayerRank(2));
         System.out.println("Player 3 Rank: " + BucketSortRanking.getPlayerRank(3));
@@ -27,5 +30,8 @@ public class TestBoot {
         System.out.println("Player 5 Rank: " + BucketSortRanking.getPlayerRank(5));
         System.out.println("Player 6 Rank: " + BucketSortRanking.getPlayerRank(6));
         System.out.println("Player 7 Rank: " + BucketSortRanking.getPlayerRank(7));
+        for(Rank rank: ranks) {
+        	System.out.println("Id:" + rank.getId() + " Rank: " + rank.getRank() + " Score:" + rank.getScore());
+        }
     }
 }
